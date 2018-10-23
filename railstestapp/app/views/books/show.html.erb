@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @book.user_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @book.body %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @book.created_at %>
+</p>
+
+<%= link_to_if @book.user_id == @user_id.to_i, 'Edit', edit_book_path(@book) %> |
+<%= link_to 'My Page', user_path(@user_id) %> |
+<%= link_to 'Show All', books_path %>

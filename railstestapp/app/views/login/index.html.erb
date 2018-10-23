@@ -1,0 +1,15 @@
+<p style="color: Red"><%= @error %></p>
+<%= form_tag action: :auth do %>
+  <div class="field">
+    <%= label_tag :user_id, 'ユーザー名' %><br />
+    <%= text_field_tag :user_id, '', size: 20 %>
+  </div>
+  <div class="field">
+    <%= label_tag :password, 'パスワード' %><br />
+    <%= password_field_tag :password, '', size: 20 %>
+  </div>
+  <%= hidden_field_tag :referer, flash[:referer] %>
+  <%= submit_tag 'ログイン' %>
+  <br>
+  <%= link_to('新規アカウント作成', '/users/new', title: '新規アカウント作成')%>
+<% end %>

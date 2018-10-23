@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<p>
+  <strong>ID:</strong>
+  <%= @user.id %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @user.password_digest %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Dm:</strong>
+  <%= @user.dm %>
+</p>
+
+<p>
+  <strong>Roles:</strong>
+  <%= @user.roles %>
+</p>
+
+<p>
+  <strong>Reviews count:</strong>
+  <%= @user.reviews_count %>
+</p>
+
+
+<%= link_to 'Edit Prof', edit_user_path(@user) %>
+<br>
+
+<table>
+  <tbody>
+    <% @books_list.each do |book| %>
+      <tr>
+        <td><%= book.user_id %></td>
+        <td><%= book.title %></td>
+        <td><%= book.body %></td>
+        <td><%= book.created_at %></td>
+        <td><%= link_to 'Show', book %></td>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add New Book', new_book_path %>
+<br>
+<%= link_to 'Show All', books_path %>

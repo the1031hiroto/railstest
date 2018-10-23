@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: hiroto
+  password_digest: pass
+  email: test
+  dm: false
+  roles: admin
+  reviews_count: 1
+
+two:
+  username: hiroto2
+  password_digest: pass
+  email: test
+  dm: false
+  roles: admin
+  reviews_count: 1
+
+yyamada:
+  username: yyamada
+  password_digest: $2a$10$uTwYyniemA7y7.z80yw17uqmRzN/LggEoSzUe.tXGdCUWPvYp9M2m
+  email: yyamada@wings.msn.to
+  dm: true
+  roles: admin,manager
+  reviews_count: 2
