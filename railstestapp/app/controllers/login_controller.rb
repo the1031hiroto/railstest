@@ -7,7 +7,7 @@ class LoginController < ApplicationController
   def auth
     usr = User.find_by(id: params[:user_id])
     if usr && usr.authenticate(params[:password]) then
-      reset_session
+      #reset_session
       #session[:usr] = usr.id
       redirect_to params[:referer]
 
@@ -22,6 +22,6 @@ class LoginController < ApplicationController
 
   def logout
     reset_session
-    redirect_to '/'
+    redirect_to '/books'
   end
 end
