@@ -1,8 +1,8 @@
 <p style="color: Red"><%= @error %></p>
 <%= form_tag action: :auth do %>
   <div class="field">
-    <%= label_tag :user_id, 'ユーザー名' %><br />
-    <%= text_field_tag :user_id, '', size: 20 %>
+    <%= label_tag :username, 'ユーザー名' %><br />
+    <%= text_field_tag :username, '', size: 20 %>
   </div>
   <div class="field">
     <%= label_tag :password, 'パスワード' %><br />

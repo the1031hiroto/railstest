@@ -68,8 +68,6 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
       @books_list = Book.where(user_id: params[:id])
-      cookies[:user_id] = { value: params[:id],
-        expires: 3.months.from_now, http_only: true }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
