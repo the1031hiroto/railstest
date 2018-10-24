@@ -12,6 +12,11 @@ class BooksController < ApplicationController
   # GET /books/1
   def show
     @user_id = session[:usr]
+    if Like.find_by(book_id: params[:id], user_id: @user_id)
+      @likes = Like.find_by(book_id: params[:id], user_id: @user_id)
+    else
+      @likes = Like.find_by(user_id: @user_id)
+    end
   end
 
   # GET /books/new

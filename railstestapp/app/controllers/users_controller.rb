@@ -6,12 +6,14 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @books_list = Book.where(user_id: params[:id])
-    @user1 = User.where(user_id: 1)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @users = User.all
+    @likes = Like.where(user_id: params[:id])
+    @books = Book.all
   end
 
   # GET /users/new
