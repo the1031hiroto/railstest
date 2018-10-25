@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   # GET /books
   def index
     @books = Book.includes(:user).all
+    @user_id = session[:usr]
   end
 
   # GET /books/1
