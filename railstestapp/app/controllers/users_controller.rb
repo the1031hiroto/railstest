@@ -56,9 +56,10 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find_by(id: params[:id])
       @books = @user.books
-      @bboks_id = @books.id
-      @like_list_by = @user.like.includes(:user)
-      @like_list_from = Like.includes(:user).where(book_id: @books_id)
+      @book_ids = @user.books.map {|key,value| key.id }
+      @like_list_from = Like.includes(:user).where(book_id: @book_ids)
+      @like_list_by = @user.likes.includes(:user)
+      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
