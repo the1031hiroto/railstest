@@ -3,8 +3,7 @@ class LikesController < ApplicationController
 
   # GET /likes
   def index
-    @likes = Like.all
-    @user_list = User.all
+    @likes = Like.includes([:user, :book]).all
   end
 
   # GET /likes/1

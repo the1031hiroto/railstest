@@ -14,8 +14,9 @@
   <tbody>
     <% @likes.each do |like| %>
       <tr>
-        <td><%= @user_list.find_by(id: like.user_id).username %></td>
-        <td><%= like.book_id %></td>
+        <td><%= like.user.username %></td>
+        <td><%= like.book.id %></td>
+        <td><%= like.book.title %></td>
         <td><%= link_to 'Show', book_path(like.book_id) %></td>
         <td><%= link_to 'Edit', edit_like_path(like) %></td>
         <td><%= link_to 'Destroy', like, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,3 +28,4 @@
 <br>
 
 <%= link_to 'New Like', new_like_path %>
+
