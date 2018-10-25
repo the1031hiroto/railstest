@@ -1,17 +1,13 @@
+<h1>User Page</h1>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
+  <strong>User Name:</strong>
   <%= @user.username %>
 </p>
 <p>
-  <strong>ID:</strong>
+  <strong>User ID:</strong>
   <%= @user.id %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
 </p>
 
 <p>
@@ -29,12 +25,6 @@
   <%= @user.roles %>
 </p>
 
-<p>
-  <strong>Reviews count:</strong>
-  <%= @user.reviews_count %>
-</p>
-
-
 <%= link_to 'Edit Prof', edit_user_path(@user) %>
 <br>
 <h2>Books</h2>
@@ -48,7 +38,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @books_list.each do |book| %>
+    <% @user.books.each do |book| %>
       <tr>
         <td><%= book.title %></td>
         <td><%= book.body %></td>
@@ -64,7 +54,7 @@
 <%= link_to 'Add New Book', new_book_path %> |
 <%= link_to 'Show All', books_path %>
 
-<h2>Likes</h2>
+<h2>Likes By You</h2>
 <table>
   <thead>
     <tr>
@@ -74,12 +64,29 @@
     </tr>
   </thead>
   <tbody>
-    <% @likes.each do |like| %>
+    <% @like_list_by.each do |like| %>
       <tr>
-        <td><%=
-          @book1 = @books.find_by(id: like.book_id)
-          @users.find_by(id: @book1.user_id).username
-        %></td>
+        <td><%= like.user.username %></td>
+        <td><%= like.book_id %></td>
+        <td><%= link_to 'Show', book_path(like.book_id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Likes From Others</h2>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Book</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @like_list_from.each do |like| %>
+      <tr>
+        <td><%= like.user.username %></td>
         <td><%= like.book_id %></td>
         <td><%= link_to 'Show', book_path(like.book_id) %></td>
       </tr>

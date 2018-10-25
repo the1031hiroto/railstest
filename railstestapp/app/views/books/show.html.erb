@@ -2,7 +2,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @book.user_id %>
+  <%= @book.user.username %>
 </p>
 <p>
   <strong>Book ID:</strong>
@@ -24,14 +24,15 @@
   <%= @book.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
 </p>
 
+<p>
+  <strong>Like Count:</strong>
+  <%= @book.likes_count %>
+</p>
+
 <%= link_to_if @book.user_id == @user_id.to_i, 'Edit', edit_book_path(@book) %> |
 <%= link_to 'My Page', user_path(@user_id) %> |
 <%= link_to 'Show All', books_path %>
-<%= link_to 'Like', likes_path(like: {user_id: session[:usr], book_id: @book.id}), method: :post %>
-<%= link_to 'Like Destroy', @like, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to_if !@like_exist, 'Like', likes_path(like: {user_id: session[:usr], book_id: @book.id}), method: :post %>
+<%= link_to_if @like_exist, 'Remove Like', @like, method: :delete, data: { confirm: 'Are you sure?' } %>
 
-<p>
-  <strong>Body:</strong>
-  <%= @likes.book_id %>
-</p>
 

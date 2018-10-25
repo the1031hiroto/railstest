@@ -4,18 +4,18 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
-    @user_list = User.all
+    @books = Book.includes(:user).all
     @user_id = session[:usr]
   end
 
   # GET /books/1
   def show
     @user_id = session[:usr]
-    if Like.find_by(book_id: params[:id], user_id: @user_id)
-      @likes = Like.find_by(book_id: params[:id], user_id: @user_id)
+    @like = Like.find_by(book_id: params[:id], user_id: @user_id)
+    if @like
+      @like_exist = true
     else
-      @likes = Like.find_by(user_id: @user_id)
+      @like_exist = false
     end
   end
 
