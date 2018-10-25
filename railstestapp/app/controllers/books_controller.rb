@@ -5,12 +5,10 @@ class BooksController < ApplicationController
   # GET /books
   def index
     @books = Book.includes(:user).all
-    @user_id = session[:usr]
   end
 
   # GET /books/1
   def show
-    @user_id = session[:usr]
     @like = Like.find_by(book_id: params[:id], user_id: @user_id)
     if @like
       @like_exist = true
@@ -31,7 +29,6 @@ class BooksController < ApplicationController
   # POST /books
   def create
     @book = Book.new(book_params)
-    @book.user_id = session[:usr]
     @book.created_at= Time.now
 
     respond_to do |format|
@@ -66,6 +63,7 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+      @user_id = session[:usr]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
