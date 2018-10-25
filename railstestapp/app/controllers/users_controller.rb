@@ -55,9 +55,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find_by(id: params[:id])
-      #@books = @user.books
+      @books = @user.books
+      @bboks_id = @books.id
       @like_list_by = @user.like.includes(:user)
-      @like_list_from = Like.includes(:user).where(book_id: 21)
+      @like_list_from = Like.includes(:user).where(book_id: @books_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
