@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'rooms/showchat'
+  resources :rooms
+  #get 'rooms/showchat'
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
-
+  
   resources :likes
   resources :users
   resources :books
@@ -10,4 +11,6 @@ Rails.application.routes.draw do
   post 'login/auth'
   get 'login/logout'
   get 'like/check'
+
+  root to: 'books#index'
 end

@@ -57,9 +57,15 @@ class UsersController < ApplicationController
       @user = User.find_by(id: session[:usr])
       @books = @user.books
       
+      #最初に書いたやつ
       #user_ids = @user.likes.map(&:book_id)
       #@like_list_by = Book.includes(:user).where(id: user_ids)
-      @like_list_by = Book.joins(:user, :likes).merge(Like.where(user_id: session[:usr])).preload(:user)
+      #mergeなぞだけどまあ動く
+      #@like_list_by = Book.joins(:user, :likes).merge(Like.where(user_id: session[:usr])).preload(:user)
+      #予想していたやつ
+      @like_list_by = Book.joins(:user, :likes).where(likes: {user_id: session[:usr]}).preload(:user)
+      #
+      #@like_list_by = Book.left_outer_joins(:user, :likes).where(likes: {user_id: session[:usr]}).includes(:user)
 
       book_ids = @user.books.map(&:id)
       @like_list_from = Like.includes(:user, :book).where(book_id: book_ids)
