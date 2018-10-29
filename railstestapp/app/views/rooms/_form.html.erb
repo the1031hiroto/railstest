@@ -20,14 +20,17 @@
     <%= form.fields_for :messages, message do |m| %>
       <div class="field">
         <%= m.label :messages %>
-        <%= m.collection_check_boxes :user_id, @users, :user_id, :username %>
+        <%= m.collection_check_boxes(:user_id, User.all, :id, :username) do |b| %>
+          <%= b.label { b.check_box + b.text } %>
+        <% end %>
       </div>
+      <%= m.text_field :user_id %>
     <% end %>
   <% end %>
     
   <div class="field">
     <%= form.label :user %>
-    <%= form.collection_check_boxes :id, @users, :id, :username %>
+    <%= form.collection_check_boxes :user_id, User.all, :id, :username %>
   </div>
   
   <div class="actions">

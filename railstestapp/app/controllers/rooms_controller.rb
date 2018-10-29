@@ -11,7 +11,6 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @messages = Message.includes(:user).where(room_id: params[:id])
-    @room = Room.where(id: params[:id])
   end
 
   # GET /rooms/new
