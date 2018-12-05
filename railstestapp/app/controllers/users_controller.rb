@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find_by(id: session[:usr])
-      @books = @user.books
+      #@books = @user.books
       
       #最初に書いたやつ
       #user_ids = @user.likes.map(&:book_id)

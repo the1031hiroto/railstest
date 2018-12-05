@@ -72,7 +72,8 @@ class RoomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
-      @room = Room.find(params[:id])
+      @room = Room.includes(:messages, :users).where(id: params[:id])
+      #@user = User.find_by(id: session[:usr])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -80,7 +81,7 @@ class RoomsController < ApplicationController
       params.require(:room).permit(:name, messages_attributes: [:user_id])
     end
 
-    def message_params
-      params.require(:message).permit(:ids)
-    end
+    #def message_params
+    #  params.require(:message).permit(:ids)
+    #end
 end
