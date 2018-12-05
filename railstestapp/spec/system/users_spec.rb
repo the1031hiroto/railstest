@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
   before do
-    #@user = User.create!(name: 'いとう')
+    @user = User.create!(username: 'hiroto', password: 'pass')
   end
 
   it 'test' do
@@ -14,10 +14,13 @@ RSpec.describe 'Users', type: :system do
 
     # usernameを入力
     fill_in 'username', with: 'hiroto'
+    expect(page).to have_field 'username', with: 'hiroto'
     fill_in 'password', with: 'pass'
-    #expect(page).to have_field '住所', with: '東京都世田谷区奥沢'
+    expect(page).to have_field 'password', with: 'pass'
 
     # 更新実行
     click_button 'ログイン'
+    # ログインに成功したことを検証する
+    expect(page).to have_content 'Books'
   end
 end
