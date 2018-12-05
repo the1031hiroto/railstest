@@ -56,3 +56,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "jquery-rails"
 gem 'bullet', :group => :development
 gem 'activerecord-import'
+
+# Capybara本体
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+# RSpec & FactoryGirl for test
+  gem 'rspec-rails'
