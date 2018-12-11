@@ -4,22 +4,23 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
-    @user_name = cookies[:username]
-    @user_id = cookies[:user_id]
-    @user_list = User.find_by(id: @user_id)
+    @books = Book.includes(:user).all
+    @user_id = session[:usr]
   end
 
   # GET /books/1
   def show
-    @user_id = cookies[:user_id]
+    @like = Like.find_by(book_id: params[:id], user_id: @user_id)
+    if @like
+      @like_exist = true
+    else
+      @like_exist = false
+    end
   end
 
   # GET /books/new
   def new
     @book = Book.new
-    @user_id = cookies[:user_id]
-    @user_id = @user_id.to_i
   end
 
   # GET /books/1/edit
@@ -29,7 +30,7 @@ class BooksController < ApplicationController
   # POST /books
   def create
     @book = Book.new(book_params)
-    @book.user_id = cookies[:user_id]
+    @book.created_at= Time.now
 
     respond_to do |format|
       if @book.save
@@ -45,10 +46,8 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +57,6 @@ class BooksController < ApplicationController
     @book.destroy
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -66,6 +64,7 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+      @user_id = session[:usr]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

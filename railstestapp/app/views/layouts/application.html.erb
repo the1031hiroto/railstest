@@ -10,5 +10,6 @@
 
   <body>
     <%= yield %>
+    <%= link_to 'Logout', { controller: :login, action: :logout }%>
   </body>
 </html>

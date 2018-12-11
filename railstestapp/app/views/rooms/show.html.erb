@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Room Nmae : <%= @room.name %></h1>
+
+
+<div id="messages">
+  <%= render @messages %>
+</div>
+<form>
+  <input type="text" data-behavior="room_speaker">
+</form>
+<br>
+<%= link_to 'Edit', edit_room_path(@room) %> |
+<%= link_to 'Back', rooms_path %>
